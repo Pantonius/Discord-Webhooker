@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Webhooker</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <style>
+            body {
+                background: #424242;
+                display: block;
+
+                margin: 20px auto;
+                max-width: 60vw;
+            }
+
+            textarea, input[type="text"], label {
+                font: 18px 'Roboto Mono';
+                resize: none;
+                width: 70%;
+                display: block;
+            }
+
+            p, h1, button {
+                font-family: 'Roboto';
+                color: white;
+                font-variant: small-caps;
+                display: block;
+            }
+
+            .partCard {
+                background: #212121;
+                border-radius: 5px;
+
+                padding: 10px 0px;
+                margin: 20px 0px;
+                display: block;
+            }
+
+            .partCard h1 {
+                font-size: 48px;
+                background: #FFA500;
+            }
+
+            #submitButton {
+                background: #FFA500;
+                border-radius: 10px;
+                border: 0px;
+
+                padding: 10px;
+
+                font-size: 20px;
+                color: white;
+            }
+
+            #submitButton:hover {
+                background: #ee9400;
+                cursor: pointer;
+            }
+
+            button, .checkBox {
+                margin-left: auto;
+            }
+
+            p.checkBox {
+                display: inline-block; margin-left: auto;
+            }
+
+            .checkBox input[type="checkbox"] {
+                display: inline-block; margin-right: 4px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div align="center" class="partCard">
+            <h1>Webhook</h1>
+            <input id="url" type="text" placeholder="url">
+        </div>
+        <div align="center" class="partCard">
+            <h1>Appearance</h1>
+            <input id="username" type="text" placeholder="username">
+            <input id="avatarUrl" type="text" placeholder="avatar_url">
+        </div>
+        <div align="center" class="partCard">
+            <h1>Content</h1>
+            <textarea id="content" placeholder="content"></textarea>
+            <p class="checkbox"><input id="ttsCB" type="checkbox">TTS</p>
+        </div>
+
+        <div>
+            <button id="submitButton">Submit</button>
+        </div>
+    </body>
+    <script>
+        $("#submitButton").click(function() {
+            var url = $("#url").val();
+            var username = $("#username").val();
+            var avatarUrl = $("#avatarUrl").val();
+            var content = $("#content").val();
+            var tts = false;
+
+            var ttsCB = document.getElementById("ttsCB");
+            tts = ttsCB.checked;
+
+            console.log(tts);
+            
+            $.post(url, 
+                {"content": content, "username": username, "avatar_url": avatarUrl, "tts": tts}
+            );
+        });
+    </script>
+</html>
