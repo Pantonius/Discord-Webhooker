@@ -105,8 +105,6 @@
 
             var ttsCB = document.getElementById("ttsCB");
             tts = ttsCB.checked;
-
-            console.log(tts);
             
             $.post(url, 
                 {"content": content, "username": username, "avatar_url": avatarUrl, "tts": tts}
